@@ -37,7 +37,6 @@ public class TelaCaixa extends javax.swing.JFrame {
         lblAbertoFechado = new javax.swing.JLabel();
         btnMudaStatus = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Caixa");
         getContentPane().setLayout(null);
 

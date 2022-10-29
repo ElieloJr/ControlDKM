@@ -57,7 +57,7 @@ public class TelaAdicionarRemessa extends javax.swing.JFrame {
         lblControledeEstoque.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         lblControledeEstoque.setForeground(new java.awt.Color(0, 0, 0));
         lblControledeEstoque.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblControledeEstoque.setText("EDITAR PRODUTO");
+        lblControledeEstoque.setText("ADICIONAR NOVA REMESSA");
         getContentPane().add(lblControledeEstoque);
         lblControledeEstoque.setBounds(0, 10, 630, 80);
 

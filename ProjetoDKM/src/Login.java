@@ -24,9 +24,6 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        mnuSair = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -40,14 +37,14 @@ public class Login extends javax.swing.JFrame {
         lblUsuaria.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUsuaria.setText("Usuário:");
         getContentPane().add(lblUsuaria);
-        lblUsuaria.setBounds(30, 150, 80, 30);
+        lblUsuaria.setBounds(30, 180, 80, 30);
 
         lblSenha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblSenha.setForeground(new java.awt.Color(0, 0, 0));
         lblSenha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSenha.setText("      Senha:");
         getContentPane().add(lblSenha);
-        lblSenha.setBounds(20, 200, 90, 30);
+        lblSenha.setBounds(20, 230, 90, 30);
 
         btnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnEntrar.setText("Entrar");
@@ -57,7 +54,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEntrar);
-        btnEntrar.setBounds(120, 250, 340, 40);
+        btnEntrar.setBounds(120, 280, 340, 40);
 
         txtSenha1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,14 +67,14 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtSenha1);
-        txtSenha1.setBounds(120, 200, 340, 30);
+        txtSenha1.setBounds(120, 230, 340, 30);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 49)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("DKM");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(70, 60, 400, 40);
+        jLabel1.setBounds(70, 90, 400, 40);
 
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,24 +87,14 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtUsuario);
-        txtUsuario.setBounds(120, 150, 340, 30);
+        txtUsuario.setBounds(120, 180, 340, 30);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 34)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Control");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(70, 20, 400, 40);
-
-        jMenu2.setText("Sair");
-
-        mnuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        mnuSair.setText("Sair");
-        jMenu2.add(mnuSair);
-
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        jLabel3.setBounds(70, 50, 400, 40);
 
         setSize(new java.awt.Dimension(587, 445));
         setLocationRelativeTo(null);
@@ -207,12 +194,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblUsuaria;
-    private javax.swing.JMenuItem mnuSair;
     private javax.swing.JPasswordField txtSenha1;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

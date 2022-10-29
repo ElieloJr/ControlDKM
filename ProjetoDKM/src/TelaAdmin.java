@@ -3,9 +3,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class TelaAdmin extends javax.swing.JFrame {
@@ -105,10 +102,10 @@ public class TelaAdmin extends javax.swing.JFrame {
         getContentPane().add(cmbCargo);
         cmbCargo.setBounds(180, 280, 330, 50);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Gerenciamento e Cadastro Dos Usuários");
+        jLabel6.setText("GERENCIAMENTO DE USUÁRIOS");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(0, 0, 680, 80);
 

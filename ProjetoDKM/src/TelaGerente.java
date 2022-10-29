@@ -6,10 +6,33 @@ import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class TelaGerente extends javax.swing.JFrame {
     public TelaGerente(String nome, String cargo) {
         initComponents();
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
+
+            PreparedStatement st = conectado.prepareStatement("SELECT * FROM usuario");
+            ResultSet resultado = st.executeQuery();
+            DefaultTableModel tblModelo;
+            tblModelo = (DefaultTableModel) tblUsuario.getModel();
+            tblModelo.setRowCount(0);
+            while (resultado.next()) {
+                Object dados[] = {
+                    resultado.getString("nome"),
+                    resultado.getString("cargo")
+                };
+                tblModelo.addRow(dados);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaTabelaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaTabelaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -37,12 +60,12 @@ public class TelaGerente extends javax.swing.JFrame {
         setTitle("Menu");
         getContentPane().setLayout(null);
 
-        lblSaudacao1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblSaudacao1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         lblSaudacao1.setForeground(new java.awt.Color(0, 0, 0));
         lblSaudacao1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSaudacao1.setText("Relação de Funcionários");
+        lblSaudacao1.setText("RELAÇÃO DE FUNCIONÁRIOS");
         getContentPane().add(lblSaudacao1);
-        lblSaudacao1.setBounds(10, 0, 400, 50);
+        lblSaudacao1.setBounds(0, 0, 720, 60);
 
         tblUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -58,7 +81,7 @@ public class TelaGerente extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblUsuario);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 50, 400, 390);
+        jScrollPane1.setBounds(120, 60, 480, 390);
 
         mnuCaixa.setText("Caixa");
 
@@ -154,7 +177,7 @@ public class TelaGerente extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(829, 532));
+        setSize(new java.awt.Dimension(729, 532));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
