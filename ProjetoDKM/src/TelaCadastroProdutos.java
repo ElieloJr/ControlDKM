@@ -1,4 +1,5 @@
 
+import dados.sistemadao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -181,16 +182,10 @@ public class TelaCadastroProdutos extends javax.swing.JFrame {
         }
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-            PreparedStatement st = conectado.prepareStatement("INSERT INTO produto VALUES(?,?,?,?)");
-
-            st.setString(1, codigo);
-            st.setString(2, nome);
-            st.setString(3, quantidade);
-            st.setString(4, valor);
-            st.executeUpdate();
-
+           sistemadao dao;
+           dao = new sistemadao();
+           dao.cadastrodeProdutos(codigo, nome, quantidade, valor);
+           
             JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso");
             
             dispose();

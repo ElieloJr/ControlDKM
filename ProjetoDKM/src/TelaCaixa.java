@@ -1,4 +1,5 @@
 
+import dados.sistemadao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -146,11 +147,10 @@ public class TelaCaixa extends javax.swing.JFrame {
 
         if (!codProd.isEmpty()) {
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-                PreparedStatement st = conectado.prepareStatement("SELECT * FROM produto WHERE codProd = ?");
-                st.setString(1, codProd);
-                ResultSet resultado = st.executeQuery();
+                sistemadao dao;
+                dao = new sistemadao();
+                ResultSet resultado = dao.adicionarCaixa(codProd);
+                
 
                 if (resultado.next()) {
                     quantidadeDesejada = JOptionPane.showInputDialog(null, "Digite quantidade do produto");
@@ -161,7 +161,7 @@ public class TelaCaixa extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Produto não encontrado");
                     return;
                 }
-                conectado.close();
+                
             } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "Driver não está na library");
             } catch (SQLException ex) {
@@ -173,12 +173,9 @@ public class TelaCaixa extends javax.swing.JFrame {
 
         if (quantDisponivel()) {
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-                PreparedStatement st = conectado.prepareStatement("UPDATE produto SET quantidade = ? WHERE codProd = ?;");
-                st.setString(1, quantidadeFinal);
-                st.setString(2, codProd);
-                st.executeUpdate();
+                sistemadao dao;
+                dao = new sistemadao();
+                dao.tabelaCaixa(quantidadeFinal, codProd);
                 
                 Object dados[] = { codProd, nome, quantidadeDesejada, valor };
                 tblModelo.addRow(dados);

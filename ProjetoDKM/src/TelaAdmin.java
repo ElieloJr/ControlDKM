@@ -1,4 +1,5 @@
 
+import dados.sistemadao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -222,18 +223,11 @@ public class TelaAdmin extends javax.swing.JFrame {
             return; // stop
         }
         try {
-            //2 - Conectar no banco de dados sistemabd
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-            //Executar a operação desejada (INSERT, UPDATE, DELETE, SELECT)
-            PreparedStatement st = conectado.prepareStatement("INSERT INTO usuario VALUES(?,?,?,?)");
-            st.setString(1, u);
-            st.setString(2, s);
-            st.setString(3, n);
-            st.setString(4, c);
-            st.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso");
+          sistemadao dao;
+          dao = new sistemadao();
+          dao.cadastrarUsuario(u, s, n, c);
+            
+           JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso");
             dispose();
 
         } catch (ClassNotFoundException ex) {
@@ -256,17 +250,13 @@ public class TelaAdmin extends javax.swing.JFrame {
             String usuario = txtUsuario.getText();
 
             try {
-                //2 - Conectar no banco de dados sistemabd
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-                //Executar a operação desejada (INSERT, UPDATE, DELETE, SELECT)
-                PreparedStatement st = conectado.prepareStatement("DELETE FROM usuario WHERE usuario = ?;");
-                st.setString(1, usuario);
-                st.executeUpdate();
+              sistemadao dao;
+              dao = new sistemadao();
+              dao.excluirUsuario(usuario);
 
                 JOptionPane.showMessageDialog(null, "Usuário Excluido com sucesso");
                 dispose();
-                conectado.close();
+                
             } catch (ClassNotFoundException | SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Mensagem de erro: " + ex.getMessage());
             }
@@ -304,16 +294,9 @@ public class TelaAdmin extends javax.swing.JFrame {
             return; // stop
         }
         try {
-            //2 - Conectar no banco de dados sistemabd
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-            //Executar a operação desejada (INSERT, UPDATE, DELETE, SELECT)
-            PreparedStatement st = conectado.prepareStatement("UPDATE usuario SET senha = ? , nome = ?, cargo = ? WHERE usuario = ?;");
-            st.setString(1, s);
-            st.setString(2, n);
-            st.setString(3, c);
-            st.setString(4, u);
-            st.executeUpdate();
+           sistemadao dao;
+           dao = new sistemadao();
+           dao.editarUsuario(u, s, n, c);
 
             JOptionPane.showMessageDialog(null, "Usuário Alterado com sucesso");
             dispose();

@@ -1,3 +1,4 @@
+import dados.sistemadao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,11 +14,10 @@ public class TelaGerente extends javax.swing.JFrame {
         initComponents();
         
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM usuario");
-            ResultSet resultado = st.executeQuery();
+            sistemadao dao;
+            dao = new sistemadao();
+            ResultSet resultado = dao.telaGerente();
+           
             DefaultTableModel tblModelo;
             tblModelo = (DefaultTableModel) tblUsuario.getModel();
             tblModelo.setRowCount(0);

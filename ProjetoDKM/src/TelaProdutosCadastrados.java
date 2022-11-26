@@ -1,4 +1,5 @@
 
+import dados.sistemadao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,11 +18,10 @@ public class TelaProdutosCadastrados extends javax.swing.JFrame {
 
     private void prencherTabela() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM produto");
-            ResultSet resultado = st.executeQuery();
+            sistemadao dao;
+            dao = new sistemadao();
+            ResultSet resultado = dao.telaprodutos();
+            
             DefaultTableModel tblModelo;
             tblModelo = (DefaultTableModel) tblProdutosSistema.getModel();
             tblModelo.setRowCount(0);
@@ -34,7 +34,7 @@ public class TelaProdutosCadastrados extends javax.swing.JFrame {
                 };
                 tblModelo.addRow(dados);
             }
-            conectado.close();
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaTabelaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -133,11 +133,9 @@ public class TelaProdutosCadastrados extends javax.swing.JFrame {
         prencherTabela();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM produto WhERE codProd LIKE ?");
-            st.setString(1, nome);
-            ResultSet resultado = st.executeQuery();
+            sistemadao dao;
+            dao = new sistemadao();
+            ResultSet resultado = dao.botaopesquisarprodutos(nome);
             
             DefaultTableModel tblModelo;
             tblModelo = (DefaultTableModel) tblProdutosSistema.getModel();
@@ -152,7 +150,7 @@ public class TelaProdutosCadastrados extends javax.swing.JFrame {
                 };
                 tblModelo.addRow(dados);
             }
-            conectado.close();
+            
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         } catch (SQLException ex) {
@@ -163,11 +161,10 @@ public class TelaProdutosCadastrados extends javax.swing.JFrame {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM produto");
-            ResultSet resultado = st.executeQuery();
+           sistemadao dao;
+           dao = new sistemadao();
+           ResultSet resultado = dao.botaoAtualizar();
+           
             DefaultTableModel tblModelo;
             tblModelo = (DefaultTableModel) tblProdutosSistema.getModel();
             tblModelo.setRowCount(0);
@@ -180,7 +177,7 @@ public class TelaProdutosCadastrados extends javax.swing.JFrame {
                 };
                 tblModelo.addRow(dados);
             }
-            conectado.close();
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TelaTabelaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

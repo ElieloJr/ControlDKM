@@ -1,4 +1,5 @@
 
+import dados.sistemadao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,13 +19,10 @@ public class TelaTabelaUsuarios extends javax.swing.JFrame {
 
     private void prencherTabela() {
         try {
-            //1 - Conectar ao Banco de Dados
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-
-            //2 - Buscar todos os usuários (SELECT)
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM usuario");
-            ResultSet resultado = st.executeQuery();
+            sistemadao dao;
+            dao = new sistemadao();
+            ResultSet resultado = dao.preechertabela();
+            
             DefaultTableModel tblModelo;
             tblModelo = (DefaultTableModel) tblUsuarios.getModel();
             tblModelo.setRowCount(0);
@@ -163,12 +161,10 @@ public class TelaTabelaUsuarios extends javax.swing.JFrame {
     private void btnAtulizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtulizarActionPerformed
         try {
             //1 - Conectar ao Banco de Dados
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-
-            //2 - Buscar todos os usuários (SELECT)
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM usuario");
-            ResultSet resultado = st.executeQuery();
+            sistemadao dao;
+            dao = new sistemadao();
+            ResultSet resultado = dao.btnAtualizar();
+            
             DefaultTableModel tblModelo;
             tblModelo = (DefaultTableModel) tblUsuarios.getModel();
             tblModelo.setRowCount(0);
@@ -198,11 +194,9 @@ public class TelaTabelaUsuarios extends javax.swing.JFrame {
             return;
         }
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM usuario WhERE cargo LIKE ? ");
-            st.setString(1, cargo);
-            ResultSet resultado = st.executeQuery();
+            sistemadao dao;
+            dao = new sistemadao();
+            ResultSet resultado = dao.cmbCargo(cargo);
             
             DefaultTableModel tblModelo;
             tblModelo = (DefaultTableModel) tblUsuarios.getModel();
@@ -238,11 +232,9 @@ public class TelaTabelaUsuarios extends javax.swing.JFrame {
         prencherTabela();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM usuario WhERE nome LIKE ?");
-            st.setString(1, nome);
-            ResultSet resultado = st.executeQuery();
+            sistemadao dao;
+            dao = new sistemadao();
+            ResultSet resultado = dao.pesquisar(nome);
             
             DefaultTableModel tblModelo;
             tblModelo = (DefaultTableModel) tblUsuarios.getModel();
@@ -257,7 +249,7 @@ public class TelaTabelaUsuarios extends javax.swing.JFrame {
                 };
                 tblModelo.addRow(dados);
             }
-            conectado.close();
+           
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         } catch (SQLException ex) {

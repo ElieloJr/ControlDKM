@@ -1,3 +1,4 @@
+import dados.sistemadao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -140,16 +141,15 @@ public class TelaExcluirProduto extends javax.swing.JFrame {
         if (resposta == 0) {
 
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-                PreparedStatement st = conectado.prepareStatement("DELETE FROM produto WHERE codProd = ?;");
-                st.setString(1, codProd);
-                st.executeUpdate();
+                sistemadao dao;
+                dao = new sistemadao();
+                dao.excluirProduto(codProd);
+                
 
                 JOptionPane.showMessageDialog(null, "Usuário Excluido com sucesso");
                 dispose();
 
-                conectado.close();
+                
             } catch (ClassNotFoundException | SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Mensagem de erro: " + ex.getMessage());
             }

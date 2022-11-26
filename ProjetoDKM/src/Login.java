@@ -1,4 +1,6 @@
 
+import com.mysql.cj.protocol.Resultset;
+import dados.sistemadao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -116,12 +118,11 @@ public class Login extends javax.swing.JFrame {
             return; // stop
         }
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM usuario WHERE usuario = ? AND senha = ?");
-            st.setString(1, usuario);
-            st.setString(2, senha);
-            ResultSet resultado = st.executeQuery();
+            sistemadao dao;
+            dao = new sistemadao();
+            ResultSet resultado = dao.validarUsusario(usuario, senha);
+            
+            
             //4 - Verificar se o usuário foi encontrado na tabela usuário do banco de dados.
             if (resultado.next()) {
                 String nome, cargo;
@@ -151,7 +152,7 @@ public class Login extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos");
             }
-            conectado.close();
+            
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Driver não está na library");
         } catch (SQLException ex) {

@@ -1,3 +1,4 @@
+import dados.sistemadao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,18 +15,16 @@ public class TelaAdicionarRemessa extends javax.swing.JFrame {
 
         if (codProd == null) { return; }
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-            PreparedStatement st = conectado.prepareStatement("SELECT * FROM produto WHERE codProd = ?");
-            st.setString(1, codProd);
-            ResultSet resultado = st.executeQuery();
+           sistemadao dao;
+           dao = new sistemadao();
+           ResultSet resultado = dao.adicionarRemessa(codProd, quantidadeAtual);
             
             if (resultado.next()) {
                 quantidadeAtual = resultado.getString("quantidade");
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário Não cadastrado");
             }
-            conectado.close();
+            
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Driver não está na library");
         } catch (SQLException ex) {
@@ -89,12 +88,9 @@ public class TelaAdicionarRemessa extends javax.swing.JFrame {
         }
         try {
             //2 - Conectar no banco de dados sistemabd
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-            PreparedStatement st = conectado.prepareStatement("UPDATE produto SET quantidade = ? WHERE codProd = ?;");
-            st.setString(1, quantidade);
-            st.setString(2, codProd);
-            st.executeUpdate();
+            sistemadao dao;
+            dao = new sistemadao();
+            ResultSet resultado = dao.cadastrarProduto(quantidade, codProd);
 
             JOptionPane.showMessageDialog(null, "Remessa adicionada com sucesso");
             dispose();

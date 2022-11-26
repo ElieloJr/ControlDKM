@@ -1,3 +1,4 @@
+import dados.sistemadao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -158,15 +159,9 @@ public class TelaEditarProduto extends javax.swing.JFrame {
             return; 
         }
         try {
-            //2 - Conectar no banco de dados sistemabd
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectado = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabd", "root", "");
-            PreparedStatement st = conectado.prepareStatement("UPDATE produto SET nome = ? , quantidade = ?, valor = ? WHERE codProd = ?;");
-            st.setString(1, nome);
-            st.setString(2, quantidade);
-            st.setString(3, valor);
-            st.setString(4, codProd);
-            st.executeUpdate();
+           sistemadao dao;
+           dao = new sistemadao();
+           dao.editarProduto(nome, quantidade, valor, codProd);
 
             JOptionPane.showMessageDialog(null, "Produto Alterado com sucesso");
             dispose();
